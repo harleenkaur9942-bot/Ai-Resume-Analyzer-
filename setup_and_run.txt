@@ -1,0 +1,84 @@
+RESUME ANALYZER AI - SETUP & HOW TO RUN
+=========================================
+
+REQUIREMENTS
+------------
+torch
+pandas
+numpy
+scikit-learn
+joblib
+streamlit
+matplotlib
+seaborn
+wordcloud
+PyPDF2
+
+(Save the list above as requirements.txt, or just install directly with
+pip install torch pandas numpy scikit-learn joblib streamlit matplotlib seaborn wordcloud PyPDF2)
+
+
+HOW TO RUN
+----------
+
+1. INSTALL PYTHON
+   Make sure Python 3.9 or higher is installed.
+
+2. (RECOMMENDED) CREATE A VIRTUAL ENVIRONMENT
+   python -m venv venv
+
+   Activate it:
+     Windows:      venv\Scripts\activate
+     Mac / Linux:  source venv/bin/activate
+
+3. INSTALL REQUIREMENTS
+   Save the requirements list above into a file named requirements.txt in
+   your project folder, then run:
+   pip install -r requirements.txt
+
+4. GET THE DATASET
+   Download the "Resume Dataset" from Kaggle
+   (search: "Resume Dataset" by Snehaan Bhawal, or "UpdatedResumeDataSet.csv").
+   Create a folder named "data" in your project directory and place the
+   CSV file inside it as:
+   data/UpdatedResumeDataSet.csv
+
+5. TRAIN THE MODEL
+   Run the training script first — this creates the "models" folder with
+   the trained model, label encoder, TF-IDF vectorizer, and metrics file:
+   python train_model.py
+
+   This will take a few minutes depending on your machine (faster with a
+   GPU, but works fine on CPU too since the dataset is small).
+
+6. RUN THE APP
+   Once training finishes, launch the Streamlit web app:
+   streamlit run app.py
+
+   This will open automatically in your browser at:
+   http://localhost:8501
+
+
+FOLDER STRUCTURE (after setup)
+-------------------------------
+project/
+|-- app.py
+|-- train_model.py
+|-- requirements.txt
+|-- data/
+|   |-- UpdatedResumeDataSet.csv
+|-- models/              (created automatically after training)
+    |-- resume_classifier.pth
+    |-- label_encoder.pkl
+    |-- tfidf_vectorizer.pkl
+    |-- metrics.json
+
+
+NOTES
+-----
+- PyPDF2 is optional — used only for reading uploaded PDF resumes. If it's
+  not installed, that feature is simply skipped (app still runs).
+- wordcloud is optional too — used for the word cloud chart in the Visuals
+  tab. If not installed, the app shows a pie chart instead.
+- The app creates a local SQLite database file (resume_analyzer.db) in the
+  project folder to store analysis history.
